@@ -198,6 +198,9 @@ width: 100%;
   grid-template-columns: 2fr 1fr;
   grid-gap: 30px;
 }
+.details2{
+  grid-template-columns: 1fr 1fr;
+}
 .details .recentOrders{
   position:relative;
   display: grid;

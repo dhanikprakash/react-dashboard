@@ -2,11 +2,12 @@
 import './App.css';
 import Chart from 'chart.js/auto';
 import { useRef, useState, useEffect } from 'react';
-import { Line, getElementAtEvent } from 'react-chartjs-2';
+import { Bar, PolarArea, getElementAtEvent } from 'react-chartjs-2';
 import { DataGrid, GridRowsProp, GridColDef } from '@mui/x-data-grid';
 
 function App() {
   const chartRef = useRef();
+  const polarRef = useRef();
   const [toggle, setToggle] = useState(false);
   const onClick = (event) => {
     console.log(getElementAtEvent(chartRef.current, event));
@@ -184,6 +185,91 @@ function App() {
           <div className="details">
             <div className="recentOrders">
               <div className="cardHeader">
+                <h2>Acquisitions</h2>
+                <a href="#" class="btn">View All</a>
+              </div>
+              <Bar
+                ref={chartRef}
+                onClick={onClick}
+                datasetIdKey='id'
+                data={{
+                  labels: ['2015', '2016', '2017', '2018', '2019', '2020', '2021'],
+                  datasets: [{
+                    label: 'Acquisitions by year',
+                    data: [65, 59, 80, 81, 56, 55, 40],
+                    backgroundColor: [
+                      'rgba(255, 99, 132, 0.2)',
+                      'rgba(255, 159, 64, 0.2)',
+                      'rgba(255, 205, 86, 0.2)',
+                      'rgba(75, 192, 192, 0.2)',
+                      'rgba(54, 162, 235, 0.2)',
+                      'rgba(153, 102, 255, 0.2)',
+                      'rgba(201, 203, 207, 0.2)'
+                    ],
+                    borderColor: [
+                      'rgb(255, 99, 132)',
+                      'rgb(255, 159, 64)',
+                      'rgb(255, 205, 86)',
+                      'rgb(75, 192, 192)',
+                      'rgb(54, 162, 235)',
+                      'rgb(153, 102, 255)',
+                      'rgb(201, 203, 207)'
+                    ],
+                    borderWidth: 1
+                  }],
+                }}
+              />
+            </div>
+            {/* new cutomers */}
+            <div className="recentCustomer">
+              <div className="cardHeader">
+                <h2>Polar Chart</h2>
+              </div>
+              <div className="dataGrid">
+                <PolarArea
+                  ref={polarRef}
+                  onClick={onClick}
+                  datasetIdKey='id-polar'
+                  data={{
+                    labels: [
+                      '2019',
+                      '2020',
+                      '2021',
+                      '2022',
+                      '2023'
+                    ],
+                    datasets: [{
+                      label: 'Acquisitions by year',
+                      data: [11, 16, 7, 3, 14],
+                      backgroundColor: [
+                        'rgb(255, 99, 132)',
+                        'rgb(75, 192, 192)',
+                        'rgb(255, 205, 86)',
+                        'rgb(201, 203, 207)',
+                        'rgb(54, 162, 235)'
+                      ]
+                    }],
+                  }}
+                />
+              </div>
+            </div>
+          </div>
+
+
+          {/* details */}
+          <div className="details details2">
+
+            {/* new cutomers */}
+            <div className="recentCustomer">
+              <div className="cardHeader">
+                <h2>Recent Cutomers</h2>
+              </div>
+              <div className="dataGrid">
+                <DataGrid rows={rows} columns={columns} />
+              </div>
+            </div>
+            <div className="recentOrders">
+              <div className="cardHeader">
                 <h2>Recent Orders</h2>
                 <a href="#" class="btn">View All</a>
               </div>
@@ -236,16 +322,10 @@ function App() {
                 </tbody>
               </table>
             </div>
-            {/* new cutomers */}
-            <div className="recentCustomer">
-              <div className="cardHeader">
-                <h2>Recent Cutomers</h2>
-              </div>
-              <div className="dataGrid">
-                <DataGrid rows={rows} columns={columns} />
-              </div>
-            </div>
+
           </div>
+
+
         </div>
       </div>
 
@@ -255,26 +335,7 @@ function App() {
 
 
 
-      {/* <Line
-        ref={chartRef}
-        onClick={onClick}
-        datasetIdKey='id'
-        data={{
-          labels: ['Jun', 'Jul', 'Aug'],
-          datasets: [
-            {
-              id: 1,
-              label: '',
-              data: [5, 6, 7],
-            },
-            {
-              id: 2,
-              label: '',
-              data: [3, 7, 1],
-            },
-          ],
-        }}
-      /> */}
+
     </div>
   );
 }
