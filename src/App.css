@@ -25,7 +25,7 @@ body{
 }
 .navigation{
   position:fixed;
-  width: 300px;
+  width: 220px;
   height: 100%;
   background-color: var(--blue);
   border-left: 10px solid var(--blue);
@@ -95,8 +95,8 @@ pointer-events: none;
 }
 .main {
   position:absolute;
-  width: calc(100% - 300px);
-  left: 300px;
+  width: calc(100% - 220px);
+  left: 220px;
   min-height: 100vh;
   background: var(--white);
   transition: 0.5s;
